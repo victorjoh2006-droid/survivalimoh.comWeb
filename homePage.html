@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival IMOH - Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #ff2e2e;
+            --dark-bg: #000;
+            --sidebar-bg: #0a0a0a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* --- DESKTOP TOP NAVBAR STYLE (DEFAULT) --- */
+        #sidebar {
+            width: 100%;
+            height: auto;
+            position: static;
+            background: var(--sidebar-bg);
+            border-bottom: 1px solid #222;
+            border-right: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            z-index: 2500;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 20px;
+            color: white;
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-grow: 0;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            border-bottom: none;
+        }
+
+        .nav-links li a {
+            display: inline-block;
+            padding: 10px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .nav-links li a i {
+            margin-right: 5px;
+            color: var(--primary-red);
+        }
+
+        .auth-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            padding-bottom: 0;
+        }
+
+        .btn-sign, .btn-join {
+            padding: 10px 20px;
+            font-size: 11px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-sign {
+            background: transparent;
+            border: 1px solid #555;
+            color: white;
+        }
+
+        .btn-join {
+            background: var(--primary-red);
+            border: none;
+            color: white;
+        }
+
+        /* --- DESKTOP CONTENT AREA --- */
+        main, section, footer {
+            margin-left: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .hero {
+            height: calc(100vh - 70px);
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url('BodyImage.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 10vw, 80px);
+            color: var(--primary-red);
+            margin: 0;
+        }
+
+        /* --- MOBILE TOGGLE (HIDDEN ON DESKTOP) --- */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            background: var(--primary-red);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 3000;
+        }
+
+        /* White Section Overrides */
+        .white-section {
+            background: white;
+            color: #111;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .leader-table {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #f9f9f9;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .leader-table th {
+            background: #222;
+            color: white;
+            padding: 15px;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        .leader-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-container input, .contact-container textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .btn-contact {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            width: 100%;
+        }
+
+        /* Features */
+        .game-features {
+            padding: 80px 10%;
+            background: #050505;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            background: #111;
+            padding: 30px;
+            border-left: 3px solid var(--primary-red);
+            color: white;
+        }
+
+        .feature-item i {
+            color: var(--primary-red);
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            padding: 80px 10%;
+            background: #050505;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 10px;
+            border: 1px solid #222;
+            background: #111;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: 0.3s ease;
+            color: #aaa;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 20px 20px 20px;
+            border-top: 1px solid #222;
+        }
+
+        .live-stats {
+            display: flex;
+            justify-content: space-around;
+            background: #0a0a0a;
+            padding: 40px 10%;
+            border-top: 1px solid #222;
+        }
+
+        .stat-box h3 {
+            color: var(--primary-red);
+            font-size: 30px;
+            margin: 0;
+        }
+
+        .stat-box p {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            background: #000;
+            border-top: 1px solid #222;
+        }
+
+        /* --- MOBILE ONLY RESPONSIVE OVERRIDES --- */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            #sidebar {
+                width: 240px;
+                height: 100vh;
+                position: fixed;
+                left: 0;
+                top: 0;
+                background: var(--sidebar-bg);
+                border-right: 1px solid #222;
+                border-bottom: none;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 20px;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+
+            #sidebar.active {
+                transform: translateX(0);
+            }
+
+            .logo {
+                margin-bottom: 40px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0;
+                flex-grow: 1;
+                width: 100%;
+            }
+
+            .nav-links li {
+                border-bottom: 1px solid #111;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 15px 0;
+            }
+
+            .auth-buttons {
+                flex-direction: column;
+                padding-bottom: 20px;
+                width: 100%;
+            }
+
+            .hero {
+                height: 100vh;
+            }
+
+            main, section, footer {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <aside id="sidebar">
+        <div class="logo">SURVIVAL <span>IMOH</span></div>
+        <ul class="nav-links">
+            <li><a href="#features"><i class="fas fa-bolt"></i> Features</a></li>
+            <li><a href="#leaderboard"><i class="fas fa-trophy"></i> Leaderboard</a></li>
+            <li><a href="#faq"><i class="fas fa-question-circle"></i> FAQ</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a onclick="adminLogin()"><i class="fas fa-user-shield"></i> Admin Console</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="Login.html" class="btn-sign">Sign in</a>
+            <a href="signup.html" class="btn-join">Sign Up</a>
+        </div>
+    </aside>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>SURVIVAL IMOH</h1>
+            <p>Next-Gen Mobile FPS. High Stakes. Real Rewards.</p>
+
+            <a href="https://drive.usercontent.google.com/u/0/uc?id=1geogPRoBaGLyKq-l3nVj8m3nVdk_MAKH&export=download"
+               class="btn-join"
+               style="padding: 15px 40px; text-decoration: none; display: inline-block;">
+                Download Now
+            </a>
+        </div>
+    </main>
+
+    <section class="white-section" id="leaderboard">
+        <h2>Top Commandos</h2>
+        <table class="leader-table">
+            <thead>
+                <tr><th>Rank</th><th>Player</th><th>Winnings</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>#1</td><td>Imoh_Ghost</td><td>N200,000</td></tr>
+                <tr><td>#2</td><td>Shadow_Stalker</td><td>N98,000</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <h2 style="text-align: center; text-transform: uppercase; color: var(--primary-red); margin-bottom: 40px;">Intel (FAQ)</h2>
+        <div class="faq-container">
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">How do I enter tournaments? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Enlist (Sign Up) and verify your credentials to view match codes in your dashboard.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFAQ(this)">
+                <div class="faq-question">How are payouts handled? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Winnings are processed within 24 hours to your linked bank account.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="game-features" id="features">
+        <div class="feature-item">
+            <i class="fas fa-crosshairs"></i>
+            <h4>Precise Aiming</h4>
+            <p>Custom-tuned sensitivity for competitive mobile play.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-wallet"></i>
+            <h4>Instant Rewards</h4>
+            <p>Withdraw winnings to your registered bank account.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-microchip"></i>
+            <h4>Optimized</h4>
+            <p>Silky smooth 60FPS gameplay on mid-range devices.</p>
+        </div>
+    </section>
+
+    <section class="live-stats">
+        <div class="stat-box"><h3>14,209</h3><p>Active Players</p></div>
+        <div class="stat-box"><h3>42ms</h3><p>Avg. Latency</p></div>
+        <div class="stat-box"><h3>Live</h3><p>Tournaments</p></div>
+    </section>
+
+    <section class="white-section" id="contact">
+        <h2>Contact Support</h2>
+        <div class="contact-container">
+            <form action="#">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <textarea rows="5" placeholder="Your Message or Issue" required></textarea>
+                <button type="submit" class="btn-contact">Send Transmission</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Survival IMOH. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const icon = document.querySelector('.menu-toggle i');
+            sidebar.classList.toggle('active');
+            if (sidebar.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        }
+
+        function toggleFAQ(element) { element.classList.toggle('active'); }
+
+        // --- ADMIN LOGIN LOGIC ---
+        function adminLogin() {
+            const name = prompt("Enter Admin Name:");
+            const pass = prompt("Enter Admin Password:");
+
+            if (name === "Johnson Victor" && pass === "Admin.123") {
+                alert("Access Granted. Redirecting to Admin Panel...");
+                window.location.href = "admin.html";
+            } else {
+                alert("Unauthorized access denied.");
+            }
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768 && !link.onclick) toggleSidebar();
+            });
+        });
+    </script>
+</body>
+</html>
